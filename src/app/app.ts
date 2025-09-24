@@ -4,8 +4,10 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  template: `
+    <h1 class="text-3xl font-bold underline text-red-600">Hello world!</h1>
+    <router-outlet />
+  `,
 })
 export class App {
   protected readonly title = signal('edu-and-morty');
