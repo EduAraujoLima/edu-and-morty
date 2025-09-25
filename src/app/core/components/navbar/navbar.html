@@ -1,1 +1,43 @@
-<p>navbar works!</p>
+<mat-toolbar class="!bg-zinc-900 !text-white py-0 min-h-0 h-12 shadow-sm">
+  <div
+    class="w-full max-w-screen-2xl mx-auto h-full px-3 sm:px-4 flex items-center justify-between"
+  >
+    <!-- Brand -->
+    <div class="flex items-center gap-2 select-none">
+      <span
+        class="text-green-400 font-bold text-xl leading-none [font-family:var(--font-creepster)]"
+      >
+        Rick and Morty
+      </span>
+    </div>
+
+    <!-- Segmented controls (Home / Favorites) -->
+    <mat-button-toggle-group
+      [hideSingleSelectionIndicator]="true"
+      aria-label="Seletor de navegação"
+      name="navbar-segment"
+    >
+      <mat-button-toggle value="home">
+        <span class="flex items-center gap-2 px-3 sm:px-4 h-9">
+          <mat-icon fontIcon="home" class="text-base"></mat-icon>
+          <span class="hidden sm:inline">Início</span>
+        </span>
+      </mat-button-toggle>
+
+      <mat-button-toggle value="favorites">
+        <span class="flex items-center gap-1 px-2 h-9">
+          <mat-icon
+            fontIcon="favorite"
+            matBadgeOverlap="false"
+            matBadgeSize="small"
+            class="text-base"
+          />
+          <span class="hidden sm:inline">Favoritos</span>
+          <span class="text-xs rounded-full bg-green-400 text-white px-2 py-1">{{
+            favoritesCount()
+          }}</span>
+        </span>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</mat-toolbar>
