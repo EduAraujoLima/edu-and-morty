@@ -6,18 +6,12 @@ import {
   Character,
   CharactersPageResponse,
   CharacterFilter,
-  CharacterId,
-  CharacterIds,
   Episode,
   EpisodesPageResponse,
   EpisodeFilter,
-  EpisodeId,
-  EpisodeIds,
   Location,
   LocationsPageResponse,
   LocationFilter,
-  LocationId,
-  LocationIds,
 } from '../../shared/types';
 
 @Injectable({
@@ -32,11 +26,13 @@ export class RickAndMortyApiService {
     filters?: Record<string, string | number | boolean | undefined>,
   ): HttpParams | undefined {
     if (!filters) return undefined;
-    return Object.entries(filters).reduce((params, [key, value]) => {
-      return value !== undefined && value !== null && value !== ''
-        ? params.set(key, String(value))
-        : params;
-    }, new HttpParams());
+    return Object.entries(filters).reduce(
+      (params, [key, value]) =>
+        value !== undefined && value !== null && value !== ''
+          ? params.set(key, String(value))
+          : params,
+      new HttpParams(),
+    );
   }
 
   // Character endpoints
@@ -45,11 +41,11 @@ export class RickAndMortyApiService {
     return this.http.get<CharactersPageResponse>(`${this.baseUrl}/character`, { params });
   }
 
-  getCharacter(id: CharacterId): Observable<Character> {
+  getCharacter(id: number): Observable<Character> {
     return this.http.get<Character>(`${this.baseUrl}/character/${id}`);
   }
 
-  getMultipleCharacters(ids: CharacterIds): Observable<Character[]> {
+  getMultipleCharacters(ids: number[]): Observable<Character[]> {
     const path = ids.join(',');
     return this.http
       .get<Character | Character[]>(`${this.baseUrl}/character/${path}`)
@@ -62,11 +58,11 @@ export class RickAndMortyApiService {
     return this.http.get<LocationsPageResponse>(`${this.baseUrl}/location`, { params });
   }
 
-  getLocation(id: LocationId): Observable<Location> {
+  getLocation(id: number): Observable<Location> {
     return this.http.get<Location>(`${this.baseUrl}/location/${id}`);
   }
 
-  getMultipleLocations(ids: LocationIds): Observable<Location[]> {
+  getMultipleLocations(ids: number[]): Observable<Location[]> {
     const path = ids.join(',');
     return this.http
       .get<Location | Location[]>(`${this.baseUrl}/location/${path}`)
@@ -79,11 +75,11 @@ export class RickAndMortyApiService {
     return this.http.get<EpisodesPageResponse>(`${this.baseUrl}/episode`, { params });
   }
 
-  getEpisode(id: EpisodeId): Observable<Episode> {
+  getEpisode(id: number): Observable<Episode> {
     return this.http.get<Episode>(`${this.baseUrl}/episode/${id}`);
   }
 
-  getMultipleEpisodes(ids: EpisodeIds): Observable<Episode[]> {
+  getMultipleEpisodes(ids: number[]): Observable<Episode[]> {
     const path = ids.join(',');
     return this.http
       .get<Episode | Episode[]>(`${this.baseUrl}/episode/${path}`)

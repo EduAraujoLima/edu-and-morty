@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-locations',
   imports: [],
   templateUrl: './locations.html',
-  styleUrl: './locations.scss'
+  styleUrl: './locations.scss',
 })
-export class Locations {
-
-}
+export class LocationsComponent {}

@@ -1,10 +1,15 @@
+import { PageResponse, RequestFilters } from './utils.type';
+
+export type CharacterStatus = 'Alive' | 'Dead' | 'unknown';
+export type CharacterGender = 'Female' | 'Male' | 'Genderless' | 'unknown';
+
 export type Character = {
   id: number;
   name: string;
-  status: 'Alive' | 'Dead' | 'unknown';
+  status: CharacterStatus;
   species: string;
   type: string;
-  gender: 'Female' | 'Male' | 'Genderless' | 'unknown';
+  gender: CharacterGender;
   origin: {
     name: string;
     url: string;
@@ -18,3 +23,10 @@ export type Character = {
   url: string;
   created: string;
 };
+
+export type CharacterFilter = RequestFilters<
+  Character,
+  'name' | 'status' | 'species' | 'type' | 'gender'
+>;
+
+export type CharactersPageResponse = PageResponse<Character>;

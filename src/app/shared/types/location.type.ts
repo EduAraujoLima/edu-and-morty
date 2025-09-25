@@ -1,3 +1,5 @@
+import { PageResponse, RequestFilters } from './utils.type';
+
 export type Location = {
   id: number;
   name: string;
@@ -7,3 +9,7 @@ export type Location = {
   url: string;
   created: string;
 };
+
+export type LocationsPageResponse = PageResponse<Location>;
+
+export type LocationFilter = RequestFilters<Location, 'name' | 'type' | 'dimension'>;
