@@ -9,11 +9,22 @@ import { BreakpointService } from '../../core/services/breakpoint.service';
 import { AsyncPipe } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { CharacterCard } from '../../shared/components/character-card/character-card';
-import { LoaderDirective } from '../../shared/components/loader/loader.directive';
+import { LoaderDirective } from '../../shared/directives/loader.directive';
+import { RouterLink } from '@angular/router';
+import { EmptyDirective } from '../../shared/directives/empty';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-favorites',
-  imports: [AsyncPipe, MatGridListModule, CharacterCard, LoaderDirective],
+  imports: [
+    AsyncPipe,
+    MatGridListModule,
+    CharacterCard,
+    LoaderDirective,
+    RouterLink,
+    EmptyDirective,
+    MatButtonModule,
+  ],
   templateUrl: './favorites.html',
   host: {
     class: 'mt-8 block',

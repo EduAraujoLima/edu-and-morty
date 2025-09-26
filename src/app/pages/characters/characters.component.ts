@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { select, Store } from '@ngxs/store';
 import { FetchCharacters } from '../../core/state/character/characters.actions';
 import { CharactersState } from '../../core/state/character/characters.state';
@@ -6,15 +6,16 @@ import { CharacterCard } from '../../shared/components/character-card/character-
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AsyncPipe } from '@angular/common';
 import { TextSearchForm } from '../../shared/components/text-search-form/text-search-form';
-import { LoaderDirective } from '../../shared/components/loader/loader.directive';
+import { LoaderDirective } from '../../shared/directives/loader.directive';
 import { FavoritesState } from '../../core/state/favorites/favorites.state';
 import { CharacterWithFavorite } from '../../shared/types';
 import {
   AddCharacterToFavorites,
   RemoveCharacterFromFavorites,
 } from '../../core/state/favorites/favorites.actions';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { BreakpointService } from '../../core/services/breakpoint.service';
+import { EmptyDirective } from '../../shared/directives/empty';
 
 @Component({
   selector: 'app-characters',
@@ -26,12 +27,16 @@ import { BreakpointService } from '../../core/services/breakpoint.service';
     TextSearchForm,
     LoaderDirective,
     MatPaginatorModule,
+    EmptyDirective,
   ],
   templateUrl: './characters.component.html',
 })
 export class CharactersComponent implements OnInit {
   $characterResponse = select(CharactersState.getCharacterResponse);
   $favoriteIds = select(FavoritesState.getFavoriteCharactersIds);
+
+  $lastTextSearch = signal<string | null>(null);
+  $pageIndex = signal(0);
 
   readonly cols$ = inject(BreakpointService).cols$;
 
@@ -54,6 +59,8 @@ export class CharactersComponent implements OnInit {
   }
 
   onTextChange(text: string | null) {
+    this.$lastTextSearch.set(text);
+    this.$pageIndex.set(0);
     this.store.dispatch(
       new FetchCharacters({
         ...(text && { name: text }),
@@ -67,5 +74,16 @@ export class CharactersComponent implements OnInit {
 
   onRemoveFavorite(id: number) {
     this.store.dispatch(new RemoveCharacterFromFavorites(id));
+  }
+
+  onPageChange(change: PageEvent) {
+    this.$pageIndex.set(change.pageIndex);
+    const name = this.$lastTextSearch();
+    this.store.dispatch(
+      new FetchCharacters({
+        page: change.pageIndex + 1,
+        ...(name && { name }),
+      }),
+    );
   }
 }

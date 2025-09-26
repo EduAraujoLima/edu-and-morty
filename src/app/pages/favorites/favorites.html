@@ -1,12 +1,23 @@
 <ng-container *appIfLoading>
-  <mat-grid-list [cols]="cols$ | async" gutterSize="32" rowHeight="1:1">
-    @for (char of $favorites(); track $index) {
-      <mat-grid-tile>
-        <app-character-card
-          [character]="char"
-          (removeFromFavorites)="removeFavoriteCharacter($event)"
-        />
-      </mat-grid-tile>
-    }
-  </mat-grid-list>
+  <ng-template
+    [appEmpty]="$favorites()"
+    [appEmptyCustomTemplate]="backButton"
+    [title]="'Parece que você ainda não tem favoritos'"
+    [subtitle]="'Volte à página inicial e escolha os melhores para você.'"
+  >
+    <mat-grid-list [cols]="cols$ | async" gutterSize="32" rowHeight="1:1">
+      @for (char of $favorites(); track $index) {
+        <mat-grid-tile>
+          <app-character-card
+            [character]="char"
+            (removeFromFavorites)="removeFavoriteCharacter($event)"
+          />
+        </mat-grid-tile>
+      }
+    </mat-grid-list>
+  </ng-template>
 </ng-container>
+
+<ng-template #backButton>
+  <a mat-button color="primary" routerLink="/characters">Voltar ao início</a>
+</ng-template>

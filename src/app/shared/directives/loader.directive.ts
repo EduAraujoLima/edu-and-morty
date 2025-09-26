@@ -7,8 +7,8 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Loader } from './loader';
-import { LoaderService } from '../../../core/services/loader.service';
+import { Loader } from '../components/loader/loader';
+import { LoaderService } from '../../core/services/loader.service';
 
 @Directive({
   selector: '[appIfLoading]',

@@ -43,6 +43,14 @@ export class FavoritesState {
   @Action(FetchFavoriteCharacters)
   fetchFavoriteCharacters(ctx: StateContext<FavoritesStateModel>) {
     const stateModel = ctx.getState();
+
+    if (!stateModel.favoriteCharacterIds.length) {
+      return ctx.setState({
+        favoriteCharacterIds: [],
+        favoriteCharacters: [],
+      });
+    }
+
     return this.apiService.getMultipleCharacters(stateModel.favoriteCharacterIds).pipe(
       tap((res) => {
         ctx.patchState({
