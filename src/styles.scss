@@ -6,6 +6,8 @@
 @use '@angular/material' as mat;
 @use 'tailwindcss' as *;
 
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
 html {
   @include mat.theme(
     (
@@ -29,26 +31,42 @@ body {
   // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
   // Reset the user agent margin.
   margin: 0;
 }
 
-/* Tailwind v4 theme font tokens */
-@theme {
-  --font-poppins:
-    'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
-    sans-serif;
-  --font-creepster: 'Creepster', cursive;
-}
+  /* Tailwind v4 theme font tokens */
+  @theme {
+    --font-poppins:
+      'Poppins', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
+      sans-serif;
+    --font-creepster: 'Creepster', cursive;
+  }
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
+  .mat-mdc-notch-piece {
+    border: none;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+  }
+
+  /* Creepy cyan fill with lime outline and soft shadow (matches screenshot) */
+  .creepster-title {
+    /* Cyan fill */
+    color: #22d3ee; /* tailwind cyan-400 */
+
+    /* Lime outline using webkit stroke */
+    -webkit-text-stroke: 4px #a3e635; /* tailwind lime-400 */
+    /* Ensure outline renders behind the fill */
+    paint-order: stroke fill;
+
+    /* Soft drop shadow for depth */
+    text-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+  }

@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { State, Action, Selector, StateContext } from '@ngxs/store';
-import { GetCharacters } from './characters.actions';
+import { FetchCharacters } from './characters.actions';
 import { CharactersPageResponse } from '../../../shared/types';
-import { RickAndMortyApiService } from '../../services/rick-and-morty-api';
-import { tap } from 'rxjs';
+import { RickAndMortyApiService } from '../../services/rick-and-morty-api.service';
+import { catchError, of, tap } from 'rxjs';
 
 export interface CharactersStateModel {
   characterResponse: CharactersPageResponse | null;
@@ -20,16 +20,27 @@ export class CharactersState {
   private readonly apiService = inject(RickAndMortyApiService);
 
   @Selector()
-  static getCharacterList(state: CharactersStateModel) {
+  static getCharacterResponse(state: CharactersStateModel) {
     if (!state?.characterResponse) {
-      return [];
+      return null;
     }
-    return state.characterResponse?.results;
+    return state.characterResponse;
   }
 
-  @Action(GetCharacters)
-  add(ctx: StateContext<CharactersStateModel>, { payload }: GetCharacters) {
+  @Action(FetchCharacters)
+  add(ctx: StateContext<CharactersStateModel>, { payload }: FetchCharacters) {
     return this.apiService.getAllCharacters(payload).pipe(
+      catchError(() =>
+        of({
+          info: {
+            count: 0,
+            pages: 0,
+            next: null,
+            prev: null,
+          },
+          results: [],
+        }),
+      ),
       tap((res) => {
         ctx.patchState({
           characterResponse: res,

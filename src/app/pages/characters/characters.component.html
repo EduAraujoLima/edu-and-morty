@@ -1,3 +1,23 @@
-@for (char of $characters(); track $index) {
-  <div>{{ char.name }}</div>
-}
+<div class="flex justify-between items-center">
+  <h1 class="font-creepster creepster-title text-4xl m-0">INÍCIO</h1>
+  <app-text-search-form (textChange)="onTextChange($event)" />
+</div>
+<ng-container *appIfLoading>
+  <mat-grid-list [cols]="cols$ | async" gutterSize="32" rowHeight="1:1">
+    @for (char of $charactersWithFavorite(); track $index) {
+      <mat-grid-tile>
+        <app-character-card
+          [character]="char"
+          (addToFavorites)="onAddFavorite($event)"
+          (removeFromFavorites)="onRemoveFavorite($event)"
+        />
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
+</ng-container>
+@let characterResponse = $characterResponse();
+<mat-paginator
+  [length]="characterResponse?.info?.count || 0"
+  [pageSize]="20"
+  [showFirstLastButtons]="true"
+/>

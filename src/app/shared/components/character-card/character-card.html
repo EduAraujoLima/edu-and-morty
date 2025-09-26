@@ -1,1 +1,69 @@
-<p>character-card works!</p>
+@let c = character();
+
+<div
+  class="shadow-[0_6px_18px_rgba(0,0,0,0.35)] bg-zinc-900/50 border border-white/5 h-[400px] w-100"
+>
+  <!-- Background image filling the square card -->
+  <img
+    class="absolute inset-0 w-full h-full object-cover object-top rounded-[1rem]"
+    [src]="c.image"
+    [alt]="c.name"
+    loading="lazy"
+  />
+
+  <!-- Favorite button (Material) -->
+  <button
+    (click)="handleFavoriteClick()"
+    class="absolute top-2 right-2 cursor-pointer p-2 rounded-full bg-black/20 flex items-center justify-center text-black shadow-[0_2px_8px_rgba(0,0,0,0.25)] hover:bg-white focus:outline-none focus:ring-2 focus:ring-black/20 z-10"
+  >
+    <mat-icon>{{ c.isFavorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+  </button>
+
+  <!-- Bottom overlay with compact info -->
+  <div
+    class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/85 via-black/60 to-transparent text-white"
+  >
+    <div class="inline-block bg-black/70 px-2 py-1 rounded-md w-full">
+      <div class="text-[1.5rem] leading-tight font-creepster line-clamp-1">
+        {{ c.name }}
+      </div>
+      @if (c.species) {
+        <div class="text-white/90 text-base mt-1 line-clamp-1 bg-black/70 px-2 py-1 rounded-md">
+          {{ c.species }}
+        </div>
+      }
+    </div>
+
+    <div class="mt-2 flex items-center gap-2 text-xs min-w-0">
+      @if (c.status) {
+        <span
+          class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-white/10 border border-white/10"
+        >
+          <span
+            class="w-2 h-2 rounded-full inline-block"
+            [ngClass]="{
+              'bg-emerald-400': c.status === 'Alive',
+              'bg-red-400': c.status === 'Dead',
+              'bg-gray-400': c.status === 'unknown',
+            }"
+          ></span>
+          {{ c.status }}
+        </span>
+      }
+      @if (c.gender) {
+        <span
+          class="inline-flex items-center px-2 py-1 rounded-full bg-white/10 border border-white/10"
+        >
+          {{ c.gender }}
+        </span>
+      }
+      @if (c.origin.name) {
+        <span
+          class="hidden sm:inline-flex items-center px-2 py-1 rounded-full bg-white/10 border border-white/10 max-w-[55%] truncate min-w-0"
+        >
+          <span class="truncate">{{ c.origin.name }}</span>
+        </span>
+      }
+    </div>
+  </div>
+</div>

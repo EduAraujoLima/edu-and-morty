@@ -30,3 +30,7 @@ export type CharacterFilter = RequestFilters<
 >;
 
 export type CharactersPageResponse = PageResponse<Character>;
+
+export type CharacterWithFavorite = Character & {
+  isFavorite: boolean;
+};

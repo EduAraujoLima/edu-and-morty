@@ -10,12 +10,8 @@ const routes: Routes = [
         loadChildren: () => import('./characters/character.routes'),
       },
       {
-        path: 'locations',
-        loadComponent: () => import('./locations/locations').then((c) => c.LocationsComponent),
-      },
-      {
-        path: 'episodes',
-        loadComponent: () => import('./episodes/episodes').then((c) => c.EpisodesComponent),
+        path: 'favorites',
+        loadComponent: () => import('./favorites/favorites').then((c) => c.Favorites),
       },
     ],
   },

@@ -1,0 +1,101 @@
+.portal-loader {
+  --size: 200px;
+
+  display: inline-grid;
+  place-items: center;
+  padding: 8rem;
+  width: 100%;
+}
+
+.portal {
+  width: var(--size);
+  height: var(--size);
+
+  filter: drop-shadow(0 0 10px rgba(163, 230, 53, 0.35))
+    drop-shadow(0 0 24px rgba(52, 211, 153, 0.25));
+}
+.portal .spin {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: portal-rotate 2.8s linear infinite;
+}
+
+@keyframes portal-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Camadas internas (blobs) pulsando levemente para simular a gosma */
+.portal .core .blob {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: portal-blob 3.6s ease-in-out infinite;
+}
+.portal .core .b2 {
+  animation-duration: 4.4s;
+  animation-delay: 0.2s;
+}
+.portal .core .b3 {
+  animation-duration: 5s;
+  animation-direction: alternate-reverse;
+  animation-delay: 0.1s;
+  opacity: 0.75;
+}
+
+/* Animação de deslocamento dos anéis, dando sensação de energia fluindo */
+.portal .rings .ring {
+  animation: ring-dash 2.6s linear infinite;
+}
+.portal .rings .ring--2 {
+  animation-duration: 1.9s;
+  animation-direction: reverse;
+}
+.portal .rings .ring--3 {
+  animation-duration: 2.2s;
+}
+
+/* Partículas com traço correndo */
+.portal .sparks .spark {
+  stroke-dasharray: 6 10;
+  stroke-dashoffset: 0;
+  animation: spark-travel 2.2s ease-in-out infinite;
+}
+
+@keyframes portal-blob {
+  0%   { transform: scale(0.985) rotate(0.2deg); }
+  50%  { transform: scale(1.015) rotate(-0.2deg); }
+  100% { transform: scale(0.985) rotate(0.2deg); }
+}
+@keyframes ring-dash {
+  to { stroke-dashoffset: -120; }
+}
+@keyframes spark-travel {
+  50%  { stroke-dashoffset: -32; opacity: 1; }
+  100% { stroke-dashoffset: -64; opacity: 0.8; }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Respeitar usuários com redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .portal .spin {
+    animation-duration: 12s;
+  }
+  .portal .rings .ring,
+  .portal .core .blob,
+  .portal .sparks .spark {
+    animation-duration: 12s !important;
+  }
+}

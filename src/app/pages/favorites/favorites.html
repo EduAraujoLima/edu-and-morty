@@ -1,1 +1,12 @@
-<p>favorites works!</p>
+<ng-container *appIfLoading>
+  <mat-grid-list [cols]="cols$ | async" gutterSize="32" rowHeight="1:1">
+    @for (char of $favorites(); track $index) {
+      <mat-grid-tile>
+        <app-character-card
+          [character]="char"
+          (removeFromFavorites)="removeFavoriteCharacter($event)"
+        />
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
+</ng-container>

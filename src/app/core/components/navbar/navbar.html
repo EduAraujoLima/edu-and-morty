@@ -17,14 +17,22 @@
       aria-label="Seletor de navegação"
       name="navbar-segment"
     >
-      <mat-button-toggle value="home">
+      <mat-button-toggle
+        value="home"
+        routerLink="/characters"
+        routerLinkActive="mat-button-toggle-checked"
+      >
         <span class="flex items-center gap-2 px-3 sm:px-4 h-9">
           <mat-icon fontIcon="home" class="text-base"></mat-icon>
           <span class="hidden sm:inline">Início</span>
         </span>
       </mat-button-toggle>
 
-      <mat-button-toggle value="favorites">
+      <mat-button-toggle
+        value="favorites"
+        routerLink="/favorites"
+        routerLinkActive="mat-button-toggle-checked"
+      >
         <span class="flex items-center gap-1 px-2 h-9">
           <mat-icon
             fontIcon="favorite"
@@ -34,7 +42,7 @@
           />
           <span class="hidden sm:inline">Favoritos</span>
           <span class="text-xs rounded-full bg-green-400 text-white px-2 py-1">{{
-            favoritesCount()
+            $favorites()
           }}</span>
         </span>
       </mat-button-toggle>

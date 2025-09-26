@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocationsComponent } from './locations';
+import { TextSearchForm } from './text-search-form';
 
-describe('Locations', () => {
-  let component: LocationsComponent;
-  let fixture: ComponentFixture<LocationsComponent>;
+describe('TextSearchForm', () => {
+  let component: TextSearchForm;
+  let fixture: ComponentFixture<TextSearchForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LocationsComponent],
-    }).compileComponents();
+      imports: [TextSearchForm]
+    })
+    .compileComponents();
 
-    fixture = TestBed.createComponent(LocationsComponent);
+    fixture = TestBed.createComponent(TextSearchForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

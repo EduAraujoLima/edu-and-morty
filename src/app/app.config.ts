@@ -13,8 +13,10 @@ import { withNgxsStoragePlugin } from '@ngxs/storage-plugin';
 import { provideStore } from '@ngxs/store';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { CharactersState } from './core/state/character/characters.state';
+import { loaderInterceptor } from './core/interceptors/loader-interceptor';
+import { FavoritesState } from './core/state/favorites/favorites.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,16 +24,16 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideStore(
-      [CharactersState],
+      [CharactersState, FavoritesState],
       withNgxsReduxDevtoolsPlugin(),
       withNgxsLoggerPlugin(),
       withNgxsRouterPlugin(),
       withNgxsStoragePlugin({
-        keys: [''],
+        keys: ['favorites'],
         storage: 0,
       }),
     ),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([loaderInterceptor])),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './i18n/',

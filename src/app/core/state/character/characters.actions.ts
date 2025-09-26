@@ -1,6 +1,6 @@
 import { CharacterFilter } from '../../../shared/types';
 
-export class GetCharacters {
-  static readonly type = '[Characters] Get characters';
+export class FetchCharacters {
+  static readonly type = '[Characters] Fetch characters';
   constructor(public payload: CharacterFilter) {}
 }
