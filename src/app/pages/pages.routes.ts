@@ -6,6 +6,11 @@ const routes: Routes = [
     loadComponent: () => import('../core/components/layout/layout').then((c) => c.Layout),
     children: [
       {
+        path: '',
+        redirectTo: 'characters',
+        pathMatch: 'full',
+      },
+      {
         path: 'characters',
         loadChildren: () => import('./characters/character.routes'),
       },
@@ -14,6 +19,12 @@ const routes: Routes = [
         loadComponent: () => import('./favorites/favorites').then((c) => c.Favorites),
       },
     ],
+  },
+
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
   },
 ];
 
