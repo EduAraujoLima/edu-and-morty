@@ -9,5 +9,8 @@
   "app.favoritesEmptyTitle": "Parece que você ainda não tem favoritos",
   "app.favoritesEmptySubtitle": "Volte à página inicial e escolha os melhores para você.",
   "app.detailsEmptyTitle": "O personagem que você está procurando não existe",
-  "app.detailsEmptySubtitle": "Volte à página inicial e escolha um personagem."
+  "app.detailsEmptySubtitle": "Volte à página inicial e escolha um personagem.",
+  "app.episodes": "Episódios",
+  "app.origin": "Origem",
+  "app.location": "Localização"
 }
