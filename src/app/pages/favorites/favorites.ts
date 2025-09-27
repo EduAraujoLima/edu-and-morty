@@ -11,8 +11,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { CharacterCard } from '../../shared/components/character-card/character-card';
 import { LoaderDirective } from '../../shared/directives/loader.directive';
 import { RouterLink } from '@angular/router';
-import { EmptyDirective } from '../../shared/directives/empty';
+import { EmptyDirective } from '../../shared/directives/empty.directive';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorites',
@@ -24,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
     RouterLink,
     EmptyDirective,
     MatButtonModule,
+    TranslatePipe,
   ],
   templateUrl: './favorites.html',
   host: {

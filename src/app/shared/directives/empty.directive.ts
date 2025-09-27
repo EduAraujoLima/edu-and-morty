@@ -39,18 +39,18 @@ export class EmptyDirective implements OnChanges {
         projectableNodes = [customView.rootNodes];
       }
 
-      const title = this.title || 'Nada foi encontrado';
-      const subtitle = this.subtitle || 'Tente realizar uma nova busca';
-
       const ref: ComponentRef<NotFoundComponent> = this.viewContainer.createComponent(
         NotFoundComponent,
         {
           projectableNodes,
         },
       );
-
-      ref.setInput('title', title);
-      ref.setInput('subtitle', subtitle);
+      if (this.title) {
+        ref.setInput('title', this.title);
+      }
+      if (this.subtitle) {
+        ref.setInput('subtitle', this.subtitle);
+      }
     } else {
       this.viewContainer.createEmbeddedView(this.templateRef);
     }

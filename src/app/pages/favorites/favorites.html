@@ -1,10 +1,10 @@
-<h1 class="font-creepster creepster-title text-4xl my-4 ml-1">FAVORITOS</h1>
+<h1 class="font-creepster creepster-title text-4xl my-4 ml-1">{{ 'app.favorites' | translate }}</h1>
 <ng-container *appIfLoading>
   <ng-template
     [appEmpty]="$favorites()"
     [appEmptyCustomTemplate]="backButton"
-    [title]="'Parece que você ainda não tem favoritos'"
-    [subtitle]="'Volte à página inicial e escolha os melhores para você.'"
+    [title]="'app.favoritesEmptyTitle' | translate"
+    [subtitle]="'app.favoritesEmptySubtitle' | translate"
   >
     <mat-grid-list [cols]="cols$ | async" gutterSize="32" rowHeight="1:1">
       @for (char of $favorites(); track $index) {
@@ -20,5 +20,5 @@
 </ng-container>
 
 <ng-template #backButton>
-  <a mat-button color="primary" routerLink="/characters">Voltar ao início</a>
+  <a mat-button color="primary" routerLink="/characters">{{ 'app.back' | translate }}</a>
 </ng-template>

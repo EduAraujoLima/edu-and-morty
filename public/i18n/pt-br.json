@@ -1,0 +1,11 @@
+{
+  "app.home": "Início",
+  "app.characters": "Personagens",
+  "app.favorites": "Favoritos",
+  "app.name": "Nome",
+  "app.back": "Voltar ao início",
+  "app.emptyTitle": "Parece que você ainda não tem favoritos",
+  "app.emptySubtitle": "Volte à página inicial e escolha os melhores para você.",
+  "app.favoritesEmptyTitle": "Parece que você ainda não tem favoritos",
+  "app.favoritesEmptySubtitle": "Volte à página inicial e escolha os melhores para você."
+}

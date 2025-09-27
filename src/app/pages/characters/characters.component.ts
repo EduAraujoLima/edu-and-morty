@@ -15,7 +15,8 @@ import {
 } from '../../core/state/favorites/favorites.actions';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { BreakpointService } from '../../core/services/breakpoint.service';
-import { EmptyDirective } from '../../shared/directives/empty';
+import { EmptyDirective } from '../../shared/directives/empty.directive';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-characters',
@@ -28,6 +29,7 @@ import { EmptyDirective } from '../../shared/directives/empty';
     LoaderDirective,
     MatPaginatorModule,
     EmptyDirective,
+    TranslatePipe,
   ],
   templateUrl: './characters.component.html',
 })

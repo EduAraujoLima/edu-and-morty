@@ -4,10 +4,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-text-search-form',
-  imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatIconModule],
+  imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatIconModule, TranslatePipe],
   templateUrl: './text-search-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

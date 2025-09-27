@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-not-found',
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: './not-found.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
