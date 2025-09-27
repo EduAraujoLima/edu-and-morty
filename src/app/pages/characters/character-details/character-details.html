@@ -83,7 +83,7 @@
     @let episodes = $episodes();
     <section>
       @if (episodes?.length) {
-        <h2 class="text-xl font-semibold mb-4">Episodes</h2>
+        <h2 class="text-xl font-semibold mb-4">{{ 'app.episodes' | translate }}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           @for (e of episodes; track e.id) {
             <div
