@@ -6,7 +6,7 @@
 <ng-container *appIfLoading>
   <ng-container *appEmpty="$charactersWithFavorite()">
     <mat-grid-list [cols]="cols$ | async" gutterSize="32" rowHeight="1:1">
-      @for (char of $charactersWithFavorite(); track $index) {
+      @for (char of $charactersWithFavorite(); track char.id) {
         <mat-grid-tile>
           <app-character-card
             [character]="char"

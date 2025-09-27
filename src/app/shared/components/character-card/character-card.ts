@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+
 import { CharacterWithFavorite } from '../../types';
 
 @Component({
   selector: 'app-character-card',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, NgOptimizedImage],
   templateUrl: './character-card.html',
-  styleUrl: './character-card.scss',
+  styleUrls: ['./character-card.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterCard {
@@ -18,10 +19,11 @@ export class CharacterCard {
   removeFromFavorites = output<number>();
 
   handleFavoriteClick() {
-    const character = this.character();
-    if (character.isFavorite) {
-      return this.removeFromFavorites.emit(character.id);
+    const c = this.character();
+    if (c.isFavorite) {
+      this.removeFromFavorites.emit(c.id);
+      return;
     }
-    this.addToFavorites.emit(character.id);
+    this.addToFavorites.emit(c.id);
   }
 }
