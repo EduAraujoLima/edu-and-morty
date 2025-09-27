@@ -16,8 +16,7 @@ import { NotFoundComponent } from '../components/not-found/not-found';
 export class EmptyDirective implements OnChanges {
   private templateRef = inject(TemplateRef<unknown>);
   private viewContainer = inject(ViewContainerRef);
-
-  @Input('appEmpty') data: unknown[] | null | undefined;
+  @Input('appEmpty') data: unknown;
   @Input('appEmptyCustomTemplate') customTemplate?: TemplateRef<unknown>;
   @Input() title: string | null = null;
   @Input() subtitle: string | null = null;
@@ -27,32 +26,35 @@ export class EmptyDirective implements OnChanges {
   }
 
   private updateView(): void {
-    const isEmpty = !this.data || this.data.length === 0;
+    const isEmpty = this.isEmptyValue(this.data);
 
     this.viewContainer.clear();
 
     if (isEmpty) {
-      let projectableNodes: Node[][] = [];
-
-      if (this.customTemplate) {
-        const customView = this.customTemplate.createEmbeddedView({});
-        projectableNodes = [customView.rootNodes];
-      }
-
-      const ref: ComponentRef<NotFoundComponent> = this.viewContainer.createComponent(
-        NotFoundComponent,
-        {
-          projectableNodes,
-        },
-      );
+      const ref: ComponentRef<NotFoundComponent> =
+        this.viewContainer.createComponent(NotFoundComponent);
       if (this.title) {
         ref.setInput('title', this.title);
       }
       if (this.subtitle) {
         ref.setInput('subtitle', this.subtitle);
       }
+      if (this.customTemplate) {
+        ref.setInput('customTemplate', this.customTemplate);
+      }
     } else {
       this.viewContainer.createEmbeddedView(this.templateRef);
     }
+  }
+
+  private isEmptyValue(value: unknown): boolean {
+    if (!value) {
+      return true;
+    }
+    if (Array.isArray(value)) {
+      return value.length === 0;
+    }
+
+    return false;
   }
 }

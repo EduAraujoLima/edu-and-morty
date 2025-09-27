@@ -17,6 +17,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { BreakpointService } from '../../core/services/breakpoint.service';
 import { EmptyDirective } from '../../shared/directives/empty.directive';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-characters',
@@ -55,6 +56,7 @@ export class CharactersComponent implements OnInit {
   });
 
   private store = inject(Store);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.store.dispatch(new FetchCharacters({}));
@@ -87,5 +89,9 @@ export class CharactersComponent implements OnInit {
         ...(name && { name }),
       }),
     );
+  }
+
+  onSelectCharacter(id: number) {
+    this.router.navigate(['/characters', id]);
   }
 }

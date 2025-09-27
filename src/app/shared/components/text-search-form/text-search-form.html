@@ -1,5 +1,17 @@
 <mat-form-field appearance="outline" class="w-[370px]">
   <mat-label>{{ 'app.name' | translate }}</mat-label>
-  <input matInput [formControl]="nameControl" type="search" />
-  <mat-icon matSuffix>search</mat-icon>
+  <mat-icon matPrefix>search</mat-icon>
+  <input matInput [formControl]="nameControl" appDisableControlOnLoad />
+
+  @if (nameControl.value) {
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      aria-label="Clear"
+      (click)="nameControl.setValue('')"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  }
 </mat-form-field>

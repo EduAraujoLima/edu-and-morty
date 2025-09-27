@@ -12,6 +12,7 @@
           <app-character-card
             [character]="char"
             (removeFromFavorites)="removeFavoriteCharacter($event)"
+            (selectCharacter)="onSelectCharacter($event)"
           />
         </mat-grid-tile>
       }

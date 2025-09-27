@@ -3,12 +3,22 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
+import { debounceTime, distinctUntilChanged, skip } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
+import { DisableControlOnLoadDirective } from '../../directives/disable-control-on-load.directive';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-text-search-form',
-  imports: [MatInputModule, MatFormFieldModule, ReactiveFormsModule, MatIconModule, TranslatePipe],
+  imports: [
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    TranslatePipe,
+    DisableControlOnLoadDirective,
+    MatButtonModule,
+  ],
   templateUrl: './text-search-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -18,6 +28,6 @@ export class TextSearchForm {
   @Output() textChange = this.nameControl.valueChanges.pipe(
     debounceTime(300),
     distinctUntilChanged(),
-    startWith(''),
+    skip(1),
   );
 }

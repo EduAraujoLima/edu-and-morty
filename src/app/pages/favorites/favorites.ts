@@ -11,6 +11,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { CharacterCard } from '../../shared/components/character-card/character-card';
 import { LoaderDirective } from '../../shared/directives/loader.directive';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { EmptyDirective } from '../../shared/directives/empty.directive';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -36,6 +37,7 @@ export class Favorites implements OnInit {
   $favorites = select(FavoritesState.getFavoriteCharacters);
 
   private store = inject(Store);
+  private router = inject(Router);
   readonly cols$ = inject(BreakpointService).cols$;
 
   ngOnInit(): void {
@@ -45,4 +47,9 @@ export class Favorites implements OnInit {
   removeFavoriteCharacter(id: number) {
     this.store.dispatch(new RemoveCharacterFromFavorites(id));
   }
+
+  onSelectCharacter(id: number) {
+    this.router.navigate(['/characters', id]);
+  }
+
 }

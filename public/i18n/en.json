@@ -7,5 +7,7 @@
   "app.emptyTitle": "It looks like you don't have any favorites",
   "app.emptySubtitle": "Go back to the home page and choose the best for you.",
   "app.favoritesEmptyTitle": "It looks like you don't have any favorites",
-  "app.favoritesEmptySubtitle": "Go back to the home page and choose the best for you."
+  "app.favoritesEmptySubtitle": "Go back to the home page and choose the best for you.",
+  "app.detailsEmptyTitle": "The character you are looking for doesn't exist",
+  "app.detailsEmptySubtitle": "Go back to the home page and choose the best for you."
 }

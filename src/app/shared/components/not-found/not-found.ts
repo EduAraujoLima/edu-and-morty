@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, TemplateRef } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-not-found',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, NgTemplateOutlet],
   templateUrl: './not-found.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -15,4 +16,5 @@ export class NotFoundComponent {
   // Signal inputs
   title = input<string>('');
   subtitle = input<string>('');
+  customTemplate = input<TemplateRef<unknown> | null>(null);
 }
