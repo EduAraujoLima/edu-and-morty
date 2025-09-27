@@ -1,10 +1,10 @@
-<div class="flex flex-col gap-4 sm:flex-row justify-between items-center">
-  <h1 class="font-creepster creepster-title text-4xl m-0">
-    {{ $character()?.name || 'Character' }}
-  </h1>
-</div>
-
 <ng-container *appIfLoading>
+  <div class="flex flex-col gap-4 sm:flex-row justify-between items-center">
+    <h1 class="font-creepster creepster-title text-4xl m-0">
+      {{ $character()?.name || 'Character' }}
+    </h1>
+  </div>
+
   @let character = $character();
   <ng-template
     [appEmpty]="character"
@@ -76,8 +76,8 @@
 
     @let episodes = $episodes();
     <section>
-      <h2 class="text-xl font-semibold mb-4">Episodes</h2>
       @if (episodes?.length) {
+        <h2 class="text-xl font-semibold mb-4">Episodes</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           @for (e of episodes; track e.id) {
             <div
@@ -88,13 +88,11 @@
             </div>
           }
         </div>
-      } @else {
-        <div class="text-white/60">No episodes found.</div>
       }
     </section>
   </ng-template>
-</ng-container>
 
-<ng-template #backButton>
-  <a mat-button color="primary" routerLink="/characters">{{ 'app.back' | translate }}</a>
-</ng-template>
+  <ng-template #backButton>
+    <a mat-button color="primary" routerLink="/characters">{{ 'app.back' | translate }}</a>
+  </ng-template>
+</ng-container>
